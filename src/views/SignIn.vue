@@ -8,22 +8,22 @@
                         <h3 >Login</h3>
                     </v-row>
                 </v-card-title>
-                <v-form @submit.prevent="login">
+                <v-form @submit.prevent="submit">
                 <v-card-text>
-                        <v-text-field
-                            v-model="user.name"
+                        <!--v-text-field
+                            v-model="form.name"
                             label="Name"
                             required
-                        ></v-text-field>
+                        ></v-text-field-->
 
                         <v-text-field
-                            v-model="user.email"
+                            v-model="form.email"
                             label="E-mail"
                             required
                         ></v-text-field>
 
                         <v-text-field
-                            v-model="user.password"
+                            v-model="form.password"
                             label="Password"
                             required
                             type="password"
@@ -47,20 +47,37 @@
 </template>
 
 <script>
+
+    //import axios from 'axios';
+
+    import  {mapActions} from 'vuex';
+
     export default {
         name: "SignIn",
         data: () => ({
-            user:{
-                name: '',
+            form:{
+              //  name: '',
                 email: '',
                 password: ''
             }
         }),
 
         methods: {
-
-            login(){
-                console.log('log')
+            ...mapActions({
+                signIn:'auth/signIn'
+            }),
+            submit(){
+                this.signIn(this.form)
+                    .then(()=>{
+                        this.$router.replace({
+                            name:'dashboard'
+                        })
+                    })
+                    .catch(()=>{
+                        console.log('failed')
+                    })
+                /*let response = await axios.post('auth/signin', this.form);
+                console.log(response.data)*/
             }
         },
     }

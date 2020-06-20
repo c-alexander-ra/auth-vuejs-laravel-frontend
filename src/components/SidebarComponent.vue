@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="authenticated">
     <v-navigation-drawer
 
         v-model="drawer"
@@ -12,7 +12,7 @@
                 <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
             </v-list-item-avatar>
 
-            <v-list-item-title>John Leider</v-list-item-title>
+            <v-list-item-title>{{user.name}}</v-list-item-title>
 
             <v-btn
                 icon
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "SidebarComponent",
         data: () => ({
@@ -56,7 +58,11 @@
             expandOnHover: true,
         }),
         computed:{
+            ...mapGetters({
+                authenticated: 'auth/authenticated',
+                user: 'auth/user',
 
+            })
         },
         methods:{
             alertar(o){

@@ -9,7 +9,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-tooltip left>
+        <v-tooltip left v-if="!authenticated">
             <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on" :to="{name:'signin'}">
                     <v-icon>power</v-icon>
@@ -17,7 +17,7 @@
             </template>
             <span>Sig In</span>
         </v-tooltip>
-        <v-tooltip left>
+        <v-tooltip left v-else>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                     <v-icon>settings_power</v-icon>
@@ -29,8 +29,18 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
-        name: "NavComponent"
+        name: "NavComponent",
+        computed:{
+            ...mapGetters({
+                authenticated: 'auth/authenticated',
+                user: 'auth/user',
+
+            })
+        },
+
     }
 </script>
 

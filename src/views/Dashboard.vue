@@ -1,6 +1,5 @@
 <template>
 <div>
-    <SidebarComponent/>
     <v-row>
         <v-col>
             Dash
@@ -12,12 +11,10 @@
 
 <script>
 
-    import SidebarComponent from "@/components/SidebarComponent";
 
     export default {
         name: "Dashboard",
         components:{
-            SidebarComponent
         }
     }
 </script>

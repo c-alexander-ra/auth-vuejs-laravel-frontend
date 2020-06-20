@@ -1,6 +1,7 @@
 <template>
     <v-app>
         <NavComponent/>
+        <SidebarComponent/>
         <v-main>
             <v-container>
                 <router-view></router-view>
@@ -12,12 +13,14 @@
 <script>
 
     import NavComponent from "@/components/NavComponent";
+    import SidebarComponent from "@/components/SidebarComponent";
 
     export default {
         name: 'App',
 
         components: {
-            NavComponent
+            NavComponent,
+            SidebarComponent
         },
 
         data: () => ({
